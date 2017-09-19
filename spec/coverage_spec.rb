@@ -6,7 +6,7 @@ describe "D3 coverage" do
   # format conflict with base ruby
   nice_methods.each do |method|
     it method do
-      if CY.respond_to?(method)
+      if D3.respond_to?(method)
         # OK
       else
         skip "not implemented yet"
