@@ -1,3 +1,4 @@
+require 'opal'
 require "opal-d3"
 require "data/polish_pms"
 

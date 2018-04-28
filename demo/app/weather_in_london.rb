@@ -1,3 +1,4 @@
+require 'opal'
 require "opal-d3"
 require "data/weather_in_london"
 
