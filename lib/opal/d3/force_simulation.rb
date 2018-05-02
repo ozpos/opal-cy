@@ -39,8 +39,8 @@ module D3
   end
 
   class << self
-    def force_simulation(nodes)
-      D3::ForceSimulation.new( @d3.JS.forceSimulation(nodes))
+    def force_simulation()
+      D3::ForceSimulation.new( @d3.JS.forceSimulation())
     end
 
   end
