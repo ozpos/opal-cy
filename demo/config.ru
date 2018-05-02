@@ -11,6 +11,7 @@ map "/assets" do
 end
 
 visualizations = {
+  force: "Force: Example",
   elections_2016: "Elections 2016",
 	london_population: "London Population",
 	london_population_area: "London Population - Area Chart",
