@@ -1,4 +1,3 @@
-require 'opal'
 # Inspired by freecodecamp project
 # This visualization really stretches what opal-d3 can currently comfortably do
 # The code will hopefully become nicer in future versions of the gem

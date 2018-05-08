@@ -1,110 +1,67 @@
-require 'opal'
 require "opal-d3"
-
-# <!DOCTYPE html>
-# <meta charset="utf-8">
-#
-# <svg width="960" height="600"></svg>
-#
-# <script src="https://d3js.org/d3.v4.min.js"></script>
-# <script>
-# var nodes = [
-#   { id: "mammal", group: 0, label: "Mammals", level: 1 },
-#   { id: "dog"   , group: 0, label: "Dogs"   , level: 2 },
-#   { id: "cat"   , group: 0, label: "Cats"   , level: 2 },
-#   { id: "fox"   , group: 0, label: "Foxes"  , level: 2 },
-#   { id: "elk"   , group: 0, label: "Elk"    , level: 2 },
-#   { id: "insect", group: 1, label: "Insects", level: 1 },
-#   { id: "ant"   , group: 1, label: "Ants"   , level: 2 },
-#   { id: "bee"   , group: 1, label: "Bees"   , level: 2 },
-#   { id: "fish"  , group: 2, label: "Fish"   , level: 1 },
-#   { id: "carp"  , group: 2, label: "Carp"   , level: 2 },
-#   { id: "pike"  , group: 2, label: "Pikes"  , level: 2 }
-# ]
 require "data/force"  # ForceNodes[{}]
 
-# var width = window.innerWidth
-# var height = window.innerHeight
-#
-# var svg = d3.select('svg')
-# svg.attr('width', width).attr('height', height)
+nodes = ForceNodes.map(&:to_n)
+links = ForceLinks.map(&:to_n)
 
-visualization = D3.select("#visualization")
-svg = visualization.append("svg")
- svg.attr("height", "600px")
- svg.attr("width", "950px")
+svg = D3.select("#visualization")
+          .append("svg")
+          .attr("height", "600px")
+          .attr("width", "950px")
 
  width = svg.style("width").to_i
  height = svg.style("height").to_i
 
-# // simulation setup with all forces
-# var simulation = d3
-#   .forceSimulation()
-#   .force('charge', d3.forceManyBody().strength(-120))
-#   .force('center', d3.forceCenter(width / 2, height / 2))
-simulation = D3.force_simulation()
-                  .force("charge", [-120])
-                  .force("center", [width/2, height/2])
-#
-# function getNodeColor(node) {
-#   return node.level === 1 ? 'red' : 'gray'
-# }
-#
-# var nodeElements = svg.append("g")
-#   .attr("class", "nodes")
-#   .selectAll("circle")
-#   .data(nodes)
-#   .enter().append("circle")
-#     .attr("r", 10)
-#     .attr("fill", getNodeColor)
-nodeElements = svg.append("g")
-                   .attr("class", "ForceNodes")
-                   .append("circle")
-     .selec_all("circle")
-     .data(ForceNodes).enter()
-     .attr("r", 10)
-     .attr("fill",'red')
+link_elements = svg.append("g")
+            .attr("class", "links")
+            .select_all("line")
+            .data(links)
+            .enter().append("line")
+            .attr("stroke-width", 3)
+            .attr("stroke", "rgba(50, 50, 50, 0.2)")
 
-# var textElements = svg.append("g")
-#   .attr("class", "texts")
-#   .selectAll("text")
-#   .data(nodes)
-#   .enter().append("text")
-#     .text(function (node) { return  node.label })
-# 	  .attr("font-size", 15)
-# 	  .attr("dx", 15)
-#     .attr("dy", 4)
-getLabel = proc do |node|
-node.label
+node_elements = svg.append("g")
+            .attr("class", "nodes")
+            .select_all("circle")
+            .data(nodes)
+            .enter().append("circle")
+            .attr("r", 10)
+            .attr("fill", "blue")
+
+text_elements = svg.append("g")
+            .attr("class", "texts")
+            .select_all("text")
+            .data(nodes)
+            .enter().append("text")
+            .text{|node| `node.label` }
+            .attr("font-size", 15)
+            .attr("dx", 15)
+            .attr("dy", 4)
+
+link_force = D3
+            .force_link
+            .id{|link| `link.id` }
+            .strength{|link| `link.strength` }
+
+
+simulation = D3
+                 .force_simulation
+                 .force("link", link_force)
+                 .force("charge", D3.force_many_body.strength(-120))
+                 .force("center", D3.force_center(width / 2, height / 2))
+
+simulation.nodes(nodes).on("tick") do
+  node_elements
+      .attr("cx"){|node| `node.x`}
+      .attr("cy"){|node| `node.y`}
+  text_elements
+      .attr("x"){|node| `node.x`}
+      .attr("y"){|node| `node.y`}
+  link_elements
+      .attr("x1"){|link| `link.source.x` }
+      .attr("y1"){|link| `link.source.y` }
+      .attr("x2"){|link| `link.target.x` }
+      .attr("y2"){|link| `link.target.y` }
 end
-textElements = svg.append("g")
-                   .attr("class", "texts")
-                   .select_all("text")
-                   .data(ForceNodes)
-                   .enter().append("texts")
-                   .text("Label")
-                   .attr("font-size", 15)
-                   .attr("dx", 15)
-                   .attr("dy", 4)
 
-#   simulation.nodes(nodes).on('tick', () => {
-#     nodeElements
-#       .attr('cx', function (node) { return node.x })
-#       .attr('cy', function (node) { return node.y })
-#     textElements
-#       .attr('x', function (node) { return node.x })
-#       .attr('y', function (node) { return node.y })
-#   })
-#
-# </script>
-
-
-simulation.nodes(nodes).on("tick") {|n|
-  nodeElements
-      .attr("cx", n.x )
-      .attr("cy", n.y )
-  textElements
-      .attr("x", n.x )
-      .attr("y", n.y )
-}
-
+simulation.force("link").links(links)

@@ -1,4 +1,3 @@
-require 'opal'
 require "opal-d3"
 require "data/mtg_modern_colors"
 
