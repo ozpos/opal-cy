@@ -4,13 +4,13 @@ require "data/force"  # ForceNodes[{}]
 nodes = ForceNodes.map(&:to_n)
 links = ForceLinks.map(&:to_n)
 
-svg = D3.select("#visualization")
-          .append("svg")
+visualization = D3.select("#visualization")
+svg = visualization.append("svg")
           .attr("height", "600px")
           .attr("width", "950px")
 
- width = svg.style("width").to_i
- height = svg.style("height").to_i
+width = svg.style("width").to_i
+height = svg.style("height").to_i
 
 link_elements = svg.append("g")
             .attr("class", "links")
@@ -23,16 +23,17 @@ link_elements = svg.append("g")
 node_elements = svg.append("g")
             .attr("class", "nodes")
             .select_all("circle")
-            .data(nodes)
-            .enter().append("circle")
+            .data(nodes).enter
+            .append("circle")
             .attr("r", 10)
-            .attr("fill", "blue")
+            .attr("fill") {|n| `n.level === 1` ? 'red' : 'gray'}  #n.level == 1 ? 'red' : 'blue')
 
 text_elements = svg.append("g")
             .attr("class", "texts")
             .select_all("text")
             .data(nodes)
             .enter().append("text")
+            .attr("id","text")
             .text{|node| `node.label` }
             .attr("font-size", 15)
             .attr("dx", 15)

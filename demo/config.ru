@@ -11,7 +11,9 @@ map "/assets" do
 end
 
 visualizations = {
-  force: "Force: Example",
+    force_display: "Force: Display Nodes",
+    force_relations: "Force: Node Relations",
+    force_user_interaction: "Force: User Interaction",
   elections_2016: "Elections 2016",
 	london_population: "London Population",
 	london_population_area: "London Population - Area Chart",
