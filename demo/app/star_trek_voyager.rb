@@ -1,4 +1,3 @@
-require 'opal'
 require "opal-d3"
 require "data/star_trek_voyager"
 

@@ -11,6 +11,9 @@ map "/assets" do
 end
 
 visualizations = {
+    force_display: "Force: Display Nodes",
+    force_relations: "Force: Node Relations",
+    force_user_interaction: "Force: User Interaction",
   elections_2016: "Elections 2016",
 	london_population: "London Population",
 	london_population_area: "London Population - Area Chart",
@@ -27,6 +30,7 @@ visualizations = {
   us_gdp: "US GDP",
   cycling: "Doping in Professional Bicycle Racing",
   temperature: "Historical Temperature Record",
+  eu_force_graph: "EU Countries Force Graph"
 }
 
 visualizations.each do |script, title|

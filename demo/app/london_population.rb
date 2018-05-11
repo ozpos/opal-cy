@@ -1,4 +1,3 @@
-require 'opal'
 require "opal-d3"
 require "data/london_population"
 
@@ -29,13 +28,22 @@ svg.append("g").select_all("rect")
     .append("title").text(&format_tooltip)
 
 svg.append("g").select_all("circle")
-   .data(LondonPopulation).enter()
-   .append("circle")
-     .attr("class", "greater")
-     .attr("cx"){|d| 15 + (d.year-1800)*4 }
-     .attr("cy", 300)
-     .attr("r"){|d| (d.greater**0.5)/150.0 }
-     .append("title").text(&format_tooltip)
+    .data(LondonPopulation).enter()
+    .append("circle")
+    .attr("class", "greater")
+    .attr("cx"){|d| 15 + (d.year-1800)*4 }
+    .attr("cy", 300)
+    .attr("r"){|d| (d.greater**0.5)/150.0 }
+    .append("title").text(&format_tooltip)
+
+svg.append("g").select_all("circle")
+    .data(LondonPopulation).enter()
+    .append("circle")
+    .attr("class", "outer")
+    .attr("cx"){|d| 15 + (d.year-1800)*4 }
+    .attr("cy", 300)
+    .attr("r"){|d| (d.outer**0.5)/150.0 }
+    .append("title").text(&format_tooltip)
 
 svg.append("g").select_all("circle")
   .data(LondonPopulation).enter()
