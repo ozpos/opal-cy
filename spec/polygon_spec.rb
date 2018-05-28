@@ -14,38 +14,38 @@ describe "d3 - polygon" do
 
   # signed area
   it "d3.polygon_area" do
-    expect(D3.polygon_area(square)).to eq(-900)
-    expect(D3.polygon_area(triangle)).to eq(-1200)
+    expect(CY.polygon_area(square)).to eq(-900)
+    expect(CY.polygon_area(triangle)).to eq(-1200)
   end
 
   it "d3.polygon_centroid" do
-    expect(D3.polygon_centroid(square)).to eq([25, 25])
-    expect(D3.polygon_centroid(triangle)).to eq([130, 13.333333333333334])
+    expect(CY.polygon_centroid(square)).to eq([25, 25])
+    expect(CY.polygon_centroid(triangle)).to eq([130, 13.333333333333334])
   end
 
   it "d3.polygon_length" do
-    expect(D3.polygon_length(square)).to eq(120)
-    expect(D3.polygon_length(triangle)).to eq(160)
+    expect(CY.polygon_length(square)).to eq(120)
+    expect(CY.polygon_length(triangle)).to eq(160)
   end
 
   it "d3.polygon_contains?" do
-    expect(D3.polygon_contains?(square, [20, 20])).to eq(true)
-    expect(D3.polygon_contains?(square, [50, 20])).to eq(false)
+    expect(CY.polygon_contains?(square, [20, 20])).to eq(true)
+    expect(CY.polygon_contains?(square, [50, 20])).to eq(false)
     # Sometimes corners considered "inside"
-    expect(D3.polygon_contains?(square, [10, 10])).to eq(true)
+    expect(CY.polygon_contains?(square, [10, 10])).to eq(true)
   end
 
   it "d3.polygon_hull" do
-    hull = D3.polygon_hull(random_points)
+    hull = CY.polygon_hull(random_points)
     hull.each do |pt|
       expect(random_points).to include(pt)
     end
 
     random_points.each do |pt|
       # Sometimes corners not considered "inside"
-      expect(D3.polygon_contains?(hull, pt) || hull.include?(pt)).to eq(true)
+      expect(CY.polygon_contains?(hull, pt) || hull.include?(pt)).to eq(true)
     end
 
-    expect(D3.polygon_hull([[10,10], [20,20]])).to eq(nil)
+    expect(CY.polygon_hull([[10, 10], [20, 20]])).to eq(nil)
   end
 end

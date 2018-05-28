@@ -6,18 +6,53 @@ code_path = "#{__dir__}/../app/#{script}.rb"
 <head>
   <meta charset="utf-8">
   <title><%= title %></title>
+<% if false %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.12/cytoscape.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
   <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css' rel='stylesheet'/>
+<% end %>
+  <script src="../assets/js/cytoscape.js"></script>>
   <% if File.exist?(stylesheet_path) %>
   <link href='../assets/stylesheets/<%= script %>.css' rel='stylesheet'/>
   <% end %>
+<% if false %>
   <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js'></script>
   <script>hljs.initHighlightingOnLoad();</script>
+<% end %>
 </head>
+<style>
+  #cycy {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+</style>
 <body>
   <div class="container">
     <h1><%= title %></h1>
     <div id="visualization"></div>
+    <h2>Cytoscape</h2>
+    <div id="cyx"></div>
+    <div id="cycy"></div>
+    <% if false %>
+    <script>
+        var cycy = cytoscape({
+            container: document.getElementById('cycy'),
+            elements: [
+                { data: { id: 'a' } },
+                { data: { id: 'b' } },
+                {
+                    data: {
+                        id: 'ab',
+                        source: 'a',
+                        target: 'b'
+                    }
+                }]
+        });
+    </script>
+    <% end %>
     <div id="code">
       <h1>Code</h1>
       <pre><code><%= open(code_path).read.gsub("<", "&lt;") %></code></pre>

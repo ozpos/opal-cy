@@ -1,9 +1,11 @@
 require "bundler"
 Bundler.require
+gem "sinatra"
+require "sinatra"
 
 opal = Opal::Server.new do |s|
-  s.append_path "app"
-  s.append_path "assets"
+  s.append_path "/home/john/RubymineProjects/web/opal-cy/demo/app"
+  s.append_path "/home/john/RubymineProjects/web/opal-cy/demo/assets"
 end
 
 map "/assets" do
@@ -11,6 +13,7 @@ map "/assets" do
 end
 
 visualizations = {
+    sandbox: "Anything",
     force_display: "Force: Display Nodes",
     force_relations: "Force: Node Relations",
     force_user_interaction: "Force: User Interaction",

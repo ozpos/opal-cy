@@ -1,7 +1,7 @@
 describe "d3 - interpolate" do
-  let(:f) { D3.send(name, a, b) }
+  let(:f) { CY.send(name, a, b) }
   let(:v) { f.(0.5) }
-  let(:f2) { D3.send(name).(a, b) }
+  let(:f2) { CY.send(name).(a, b) }
   let(:v2) { f2.(0.5) }
 
   describe "numbers" do
@@ -73,8 +73,8 @@ describe "d3 - interpolate" do
     end
 
     describe "basis" do
-      let(:f) { D3.send(name, [a, b]) }
-      let(:f2) { D3.send(name).([a, b]) }
+      let(:f) { CY.send(name, [a, b]) }
+      let(:f2) { CY.send(name).([a, b]) }
 
       describe "d3.interpolate_rgb_basis" do
         let(:name) { :interpolate_rgb_basis }

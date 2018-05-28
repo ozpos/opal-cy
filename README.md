@@ -1,4 +1,8 @@
-Opal Ruby interface for D3 [ https://d3js.org/ ].
+Opal Ruby interface for Cytospace.js [ https://http://js.cytoscape.org// ].
+
+Inspired by opal-d3, thank you.
+
+
 
 It implements interface fairly closely following javascript API, except with blocks, classes, no camelcase etc.
 

@@ -1,6 +1,6 @@
 describe "d3 - area" do
   it "d3.area" do
-    expect(D3.area).to be_instance_of(D3::AreaGenerator)
+    expect(CY.area).to be_instance_of(CY::AreaGenerator)
   end
 
   let(:simple_data) {[
@@ -14,7 +14,7 @@ describe "d3 - area" do
 
   describe "basics" do
     let(:area) {
-      D3.area
+      CY.area
           .x{|d| (d[:year]-2000)*10 }
           .y1{|d| d[:value] }
           .y0(50)
@@ -26,8 +26,8 @@ describe "d3 - area" do
     end
 
     it "curve" do
-      expect(area.curve).to be_instance_of(D3::Curve)
-      expect(area.curve(D3.curve_natural).(simple_data)).to eq(%W[
+      expect(area.curve).to be_instance_of(CY::Curve)
+      expect(area.curve(CY.curve_natural).(simple_data)).to eq(%W[
         M70,93.24
         C73.3652312599681,93.76974481658695,76.7304625199362,94.29948963317388,80,95.35
         C83.2695374800638,96.40051036682611,86.4433811802233,97.97178628389153,90,98.84
@@ -51,7 +51,7 @@ describe "d3 - area" do
 
   describe "line generators" do
     let(:area) {
-      D3.area
+      CY.area
         .x0{|d| (d[:year]-2000)*10 }
         .x1{|d| (d[:year]-2000)*20 }
         .y1{|d| d[:value] }
@@ -72,25 +72,25 @@ describe "d3 - area" do
     end
 
     it ".line_x0" do # x0 y0
-      expect(area.line_x0).to be_instance_of(D3::LineGenerator)
+      expect(area.line_x0).to be_instance_of(CY::LineGenerator)
       expect(area.line_x0.x.(point)).to eq(420)
       expect(area.line_x0.y.(point)).to eq(50)
     end
 
     it ".line_x1" do # x1 y0
-      expect(area.line_x1).to be_instance_of(D3::LineGenerator)
+      expect(area.line_x1).to be_instance_of(CY::LineGenerator)
       expect(area.line_x1.x.(point)).to eq(840)
       expect(area.line_x1.y.(point)).to eq(50)
     end
 
     it ".line_y0" do # x0 y0
-      expect(area.line_y0).to be_instance_of(D3::LineGenerator)
+      expect(area.line_y0).to be_instance_of(CY::LineGenerator)
       expect(area.line_y0.x.(point)).to eq(420)
       expect(area.line_y0.y.(point)).to eq(50)
     end
 
     it ".line_y1" do # x0 y1
-      expect(area.line_y1).to be_instance_of(D3::LineGenerator)
+      expect(area.line_y1).to be_instance_of(CY::LineGenerator)
       expect(area.line_y1.x.(point)).to eq(420)
       expect(area.line_y1.y.(point)).to eq(117)
     end

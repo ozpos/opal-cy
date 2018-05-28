@@ -1,7 +1,7 @@
-require "opal-d3"
+require "opal-cy"
 require "data/london_population"
 
-svg = D3.select("#visualization").append("svg")
+svg = CY.select("#visualization").append("svg")
 
 format_tooltip = proc do |d|
   "%d - %.1fm / %.1fm" % [d.year, d.inner/1_000_000, d.greater/1_000_000]
@@ -54,6 +54,6 @@ svg.append("g").select_all("circle")
     .attr("r"){|d| (d.inner**0.5)/150.0 }
     .append("title").text(&format_tooltip)
 
-legend = D3.select("#visualization").append("div").attr("id", "legend")
+legend = CY.select("#visualization").append("div").attr("id", "legend")
 legend.append("tr").append("td").attr("class", "greater").text("Outer London")
 legend.append("tr").append("td").attr("class", "inner").text("Inner London")

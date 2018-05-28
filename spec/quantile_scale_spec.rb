@@ -1,10 +1,10 @@
 describe "d3 - quantile scale" do
   it "d3.scale_quantile" do
-    expect(D3.scale_quantile).to be_instance_of(D3::QuantileScale)
+    expect(CY.scale_quantile).to be_instance_of(CY::QuantileScale)
   end
 
   it "basics" do
-    q = D3.scale_quantile.domain([0,10]).range(("a".."f").to_a)
+    q = CY.scale_quantile.domain([0, 10]).range(("a".."f").to_a)
     expect(q.(4)).to eq("c")
 
     expect(q.domain).to eq([0,10])
@@ -14,7 +14,7 @@ describe "d3 - quantile scale" do
   end
 
   it "copy" do
-    q = D3.scale_quantile.domain([1,5]).range(["x", "y"])
+    q = CY.scale_quantile.domain([1, 5]).range(["x", "y"])
     qc = q.copy.domain([0,20])
     expect(qc.domain).to eq([0,20])
     expect(qc.range).to eq(["x", "y"])

@@ -1,4 +1,6 @@
 source "https://rubygems.org"
 
+gem 'opal', '~>0.10'
 gem "sinatra"
-gem "opal-d3", path: ".."
+gem "opal-cy", path: ".."
+gem 'rack'

@@ -1,8 +1,8 @@
 describe "d3 - selection - data" do
   after(:each) do
-    D3.select("#test-area").html("")
+    CY.select("#test-area").html("")
   end
-  let(:root) { D3.select("#test-area") }
+  let(:root) { CY.select("#test-area") }
   let(:html) { root.html }
 
   describe "list" do

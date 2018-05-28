@@ -1,11 +1,11 @@
 describe "d3 - band scale" do
   it "d3.scale_band" do
-    expect(D3.scale_band).to be_instance_of(D3::BandScale)
+    expect(CY.scale_band).to be_instance_of(CY::BandScale)
   end
 
   let(:d) { ("a".."f").to_a }
   it "basics" do
-    scale = D3.scale_band.domain(d)
+    scale = CY.scale_band.domain(d)
     expect(d.map{|v| scale.(v).round(2)}).to eq([0, 0.17, 0.33, 0.5, 0.67, 0.83])
     expect(scale.bandwidth).to eq(0.16666666666666666)
     expect(scale.step).to eq(0.16666666666666666)
@@ -13,7 +13,7 @@ describe "d3 - band scale" do
   end
 
   it "padding" do
-    scale = D3.scale_band.domain(d).range([0,100])
+    scale = CY.scale_band.domain(d).range([0, 100])
     expect(scale.padding).to eq(0)
     expect(scale.padding_inner).to eq(0)
     expect(scale.padding_outer).to eq(0)
@@ -35,7 +35,7 @@ describe "d3 - band scale" do
   end
 
   it "copy" do
-    scale = D3.scale_band.domain(d)
+    scale = CY.scale_band.domain(d)
     sc = scale.copy.range([10,20])
     expect(scale.domain).to eq(d)
     expect(sc.domain).to eq(d)
@@ -44,7 +44,7 @@ describe "d3 - band scale" do
   end
 
   it "align" do
-    scale = D3.scale_band.domain(d).range([0,100])
+    scale = CY.scale_band.domain(d).range([0, 100])
     expect(scale.align).to eq(0.5)
     scale.padding_inner(0.2)
     scale.padding_outer(0.4)
@@ -62,7 +62,7 @@ describe "d3 - band scale" do
   end
 
   it "round" do
-    scale = D3.scale_band.domain(d).range([0,100])
+    scale = CY.scale_band.domain(d).range([0, 100])
     expect(scale.round).to eq(false)
     scale.range_round([0,1000])
     expect(scale.range).to eq([0,1000])

@@ -1,7 +1,7 @@
-require "opal-d3"
+require "opal-cy"
 require "data/man_vs_horse"
 
-svg = D3.select("#visualization")
+svg = CY.select("#visualization")
   .append("svg")
   .attr("height", "1200px")
   .attr("width", "100%")
@@ -10,9 +10,9 @@ width = svg.style("width").to_i
 max_time = ManVsHorse.flat_map{|d| [d.horse_time_min, d.human_time_min]}.max
 min_year, max_year = ManVsHorse.map(&:year).minmax
 
-x = D3.scale_linear.domain([0, max_time]).range([0,width-90]).nice
-y = D3.scale_linear.domain([min_year, max_year+1]).range([0, 1160])
-c = D3.scale_ordinal.range(D3.scheme_category_10)
+x = CY.scale_linear.domain([0, max_time]).range([0, width-90]).nice
+y = CY.scale_linear.domain([min_year, max_year+1]).range([0, 1160])
+c = CY.scale_ordinal.range(CY.scheme_category_10)
 
 graph_area = svg.append("g")
   .attr("transform", "translate(60, 20)")
@@ -50,6 +50,6 @@ svg.append("g")
     .attr("y"){|d| y.(d.year+0.5) }
     .text{|d| (d.winner == "Horse" ? "🐎" : "🏃") + " #{d.year}" }
 
-axis_bottom = D3.axis_bottom(x)
+axis_bottom = CY.axis_bottom(x)
   .tick_format{|v| h = (v / 60).floor; m  = (v % 60).floor; "%d:%02d" % [h,m] }
 graph_area.append("g").attr("transform", "translate(0, 1160)").call(axis_bottom)

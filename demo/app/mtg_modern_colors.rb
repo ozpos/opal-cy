@@ -1,7 +1,7 @@
-require "opal-d3"
+require "opal-cy"
 require "data/mtg_modern_colors"
 
-flex = D3.select("#visualization")
+flex = CY.select("#visualization")
   .append("div")
   .style("display", "flex")
   .style("flex-wrap", "wrap")
@@ -20,10 +20,10 @@ MtgModernColors.group_by(&:cmc).sort.each do |cmc, cards|
     .attr("font-size", "30px")
 
   cards.sort_by!{|c| "wubrgxm".index(c.color)}
-  pie = D3.pie.value(&:count).sort(nil)
+  pie = CY.pie.value(&:count).sort(nil)
 
   pie.(cards).each do |arc_data|
-    arc = D3.arc
+    arc = CY.arc
       .inner_radius(40)
       .outer_radius(90)
       .start_angle(arc_data[:start_angle])

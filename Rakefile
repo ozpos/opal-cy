@@ -21,11 +21,11 @@ end
 
 desc "Build gem"
 task "gem:build" do
-  system "gem build opal-d3.gemspec"
+  system "gem build opal-cy.gemspec"
 end
 
 desc "Upload gem"
 task "gem:push" => "gem:build" do
-  gem_file = Dir["opal-d3-*.gem"][-1] or raise "No gem found"
+  gem_file = Dir["opal-cy-*.gem"][-1] or raise "No gem found"
   system "gem", "push", gem_file
 end

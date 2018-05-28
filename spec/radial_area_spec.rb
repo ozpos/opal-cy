@@ -1,6 +1,6 @@
 describe "d3 - radial area" do
   it "d3.radial_area" do
-    expect(D3.radial_area).to be_instance_of(D3::RadialAreaGenerator)
+    expect(CY.radial_area).to be_instance_of(CY::RadialAreaGenerator)
   end
 
   let(:simple_data) {[
@@ -14,7 +14,7 @@ describe "d3 - radial area" do
 
   describe "basics" do
     let(:radial_area) {
-      D3.radial_area
+      CY.radial_area
           .angle{|d| (d[:year]-2000)/10 }
           .outer_radius{|d| d[:value] }
           .inner_radius(50)
@@ -38,8 +38,8 @@ describe "d3 - radial area" do
     end
 
     it "curve" do
-      expect(radial_area.curve).to be_instance_of(D3::Curve)
-      expect(radial_area.curve(D3.curve_natural).(simple_data).gsub(/\d+\.\d+/){$&.to_f.round(2)}).to eq(%W[
+      expect(radial_area.curve).to be_instance_of(CY::Curve)
+      expect(radial_area.curve(CY.curve_natural).(simple_data).gsub(/\d+\.\d+/){$&.to_f.round(2)}).to eq(%W[
         M60.07,-71.31C62.74,-69.61,65.42,-67.91,68.4,-66.43
         C71.38,-64.95,74.66,-63.68,77.42,-61.44
         C80.19,-59.2,82.45,-55.98,84.08,-53.99
@@ -76,7 +76,7 @@ describe "d3 - radial area" do
 
   describe "line generators" do
     let(:radial_area) {
-      D3.radial_area
+      CY.radial_area
         .start_angle{|d| (d[:year]-2000)/20 }
         .end_angle{|d| (d[:year]-2000)/10 }
         .outer_radius{|d| d[:value] }
@@ -97,25 +97,25 @@ describe "d3 - radial area" do
     end
 
     it ".line_start_angle" do # start_angle inner_radius
-      expect(radial_area.line_start_angle).to be_instance_of(D3::RadialLineGenerator)
+      expect(radial_area.line_start_angle).to be_instance_of(CY::RadialLineGenerator)
       expect(radial_area.line_start_angle.angle.(point)).to eq(2.1)
       expect(radial_area.line_start_angle.radius.(point)).to eq(50)
     end
 
     it ".line_end_angle" do # end_angle inner_radius
-      expect(radial_area.line_end_angle).to be_instance_of(D3::RadialLineGenerator)
+      expect(radial_area.line_end_angle).to be_instance_of(CY::RadialLineGenerator)
       expect(radial_area.line_end_angle.angle.(point)).to eq(4.2)
       expect(radial_area.line_end_angle.radius.(point)).to eq(50)
     end
 
     it ".line_inner_radius" do # start_angle inner_radius
-      expect(radial_area.line_inner_radius).to be_instance_of(D3::RadialLineGenerator)
+      expect(radial_area.line_inner_radius).to be_instance_of(CY::RadialLineGenerator)
       expect(radial_area.line_inner_radius.angle.(point)).to eq(2.1)
       expect(radial_area.line_inner_radius.radius.(point)).to eq(50)
     end
 
     it ".line_outer_radius" do # start_angle outer_radius
-      expect(radial_area.line_outer_radius).to be_instance_of(D3::RadialLineGenerator)
+      expect(radial_area.line_outer_radius).to be_instance_of(CY::RadialLineGenerator)
       expect(radial_area.line_outer_radius.angle.(point)).to eq(2.1)
       expect(radial_area.line_outer_radius.radius.(point)).to eq(117)
     end

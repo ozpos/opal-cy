@@ -1,69 +1,69 @@
 describe "d3 - selection" do
   after(:each) do
-    D3.select("#test-area").html("")
+    CY.select("#test-area").html("")
   end
 
   it "d3.selection" do
-    s = D3.selection
-    expect(s).to be_instance_of(D3::Selection)
+    s = CY.selection
+    expect(s).to be_instance_of(CY::Selection)
     expect(s.size).to eq(1)
   end
 
   it "d3.select" do
-    s = D3.select("div")
-    expect(s).to be_instance_of(D3::Selection)
+    s = CY.select("div")
+    expect(s).to be_instance_of(CY::Selection)
     expect(s.size).to eq(1)
     expect(s.empty?).to eq(false)
 
-    s = D3.select("h6")
-    expect(s).to be_instance_of(D3::Selection)
+    s = CY.select("h6")
+    expect(s).to be_instance_of(CY::Selection)
     expect(s.size).to eq(0)
     expect(s.empty?).to eq(true)
   end
 
   it "d3.select_all" do
-    s = D3.select_all("div")
-    expect(s).to be_instance_of(D3::Selection)
+    s = CY.select_all("div")
+    expect(s).to be_instance_of(CY::Selection)
     expect(s.size).to eq(1)
     expect(s.empty?).to eq(false)
 
-    s = D3.select_all("h6")
-    expect(s).to be_instance_of(D3::Selection)
+    s = CY.select_all("h6")
+    expect(s).to be_instance_of(CY::Selection)
     expect(s.size).to eq(0)
     expect(s.empty?).to eq(true)
   end
 
   describe "nested selections" do
     before(:each) do
-      D3.select("div").html("
+      CY.select("div").html("
         <p><b>1</b><b>2</b><b>3</b></p>
         <p><b>4</b><b>5</b><b>6</b></p>
       ")
     end
 
     it "selection.select" do
-      expect(D3.select("p").select("b").size).to eq(1)
-      expect(D3.select_all("p").select("b").size).to eq(2)
+      expect(CY.select("p").select("b").size).to eq(1)
+      expect(CY.select_all("p").select("b").size).to eq(2)
     end
 
     it "selection.select_all" do
-      expect(D3.select("p").select_all("b").size).to eq(3)
-      expect(D3.select_all("p").select_all("b").size).to eq(6)
+      expect(CY.select("p").select_all("b").size).to eq(3)
+      expect(CY.select_all("p").select_all("b").size).to eq(6)
     end
   end
 
   describe "selection.filter - selector string" do
     before(:each) do
-      D3.select("div").html("
+      CY.select("div").html("
         <span class='a b'>1</span>
         <span class='b c'>2</span>
         <span class='c d'>3</span>
       ")
     end
-    let(:a) { D3.select_all("span.a") }
-    let(:b) { D3.select_all("span.b") }
-    let(:c) { D3.select_all("span.c") }
-    let(:d) { D3.select_all("span.d") }
+    let(:a) { CY.select_all("span.a") }
+    let(:b) { CY.select_all("span.b") }
+    let(:c) { CY.select_all("span.c") }
+    let(:d) { CY.select_all("span.d") }
 
     it do
       expect(b.filter(".c").size).to eq(1)
@@ -72,7 +72,7 @@ describe "d3 - selection" do
 
   describe "selection.filter - filter" do
     before(:each) do
-      D3.select("div")
+      CY.select("div")
         .select_all("span")
         .data(%W[a b c d])
         .enter
@@ -81,15 +81,15 @@ describe "d3 - selection" do
     end
 
     it "function" do
-      D3.select_all("span").filter{|d| d =~ /[bc]/}.attr("class", "x")
-      expect(D3.select("div").html).to eq(
+      CY.select_all("span").filter{|d| d =~ /[bc]/}.attr("class", "x")
+      expect(CY.select("div").html).to eq(
         %Q[<span class="x">a</span><span>b</span><span>c</span><span class="x">d</span>]
       )
     end
 
     it "function with index" do
-      D3.select_all("span").filter{|d,i| i.even?}.attr("class", "y")
-      expect(D3.select("div").html).to eq(
+      CY.select_all("span").filter{|d,i| i.even?}.attr("class", "y")
+      expect(CY.select("div").html).to eq(
         %Q[<span class="y">a</span><span>b</span><span class="y">c</span><span>d</span>]
       )
     end
@@ -97,7 +97,7 @@ describe "d3 - selection" do
 
   describe "selection.each" do
     before(:each) do
-      D3.select("div")
+      CY.select("div")
         .select_all("span")
         .data(%W[a b c d])
         .enter
@@ -106,7 +106,7 @@ describe "d3 - selection" do
     end
     it do
       results = []
-      D3.select_all("span").each do |n|
+      CY.select_all("span").each do |n|
         results << n
       end
       expect(results).to eq(["a", "b", "c", "d"])
@@ -114,7 +114,7 @@ describe "d3 - selection" do
 
     it do
       results = []
-      D3.select_all("span").each do |n,i|
+      CY.select_all("span").each do |n,i|
         results << [n,i]
       end
       expect(results).to eq([["a", 0], ["b", 1], ["c", 2], ["d", 3]])
@@ -122,7 +122,7 @@ describe "d3 - selection" do
   end
 
   it "selection.append" do
-    div = D3.select_all("div")
+    div = CY.select_all("div")
     ul = div.append("ul")
     ul.append("li")
     ul.append("li")
@@ -132,7 +132,7 @@ describe "d3 - selection" do
   end
 
   it "selection.html / selection.text" do
-    div = D3.select_all("div")
+    div = CY.select_all("div")
     expect(div.html).to eq("")
     expect(div.text).to eq("")
 
@@ -150,7 +150,7 @@ describe "d3 - selection" do
   end
 
   it "svg" do
-    D3.select("div")
+    CY.select("div")
       .append("svg")
         .attr("width", 960)
         .attr("height", 500)
@@ -159,13 +159,13 @@ describe "d3 - selection" do
       .append("rect")
         .attr("width", 920)
         .attr("height", 460)
-    expect(D3.select("div").html).to eq(
+    expect(CY.select("div").html).to eq(
       %Q[<svg width="960" height="500"><g transform="translate(20,20)"><rect width="920" height="460"></rect></g></svg>])
   end
 
   describe do
     before(:each) do
-      D3.select("div").html("
+      CY.select("div").html("
         <p><b>1</b><b>2</b><b>3</b></p>
         <p><b>4</b><b>5</b><b>6</b></p>
       ")
@@ -174,12 +174,12 @@ describe "d3 - selection" do
     # These should use opal-browser, but that seems to be broken with phantomjs
     # For now just expose raw js objects
     it "selection.node" do
-      expect(D3.select_all("b").node).to be_instance_of(Native::Object)
+      expect(CY.select_all("b").node).to be_instance_of(Native::Object)
     end
 
     it "selection.nodes" do
-      expect(D3.select_all("b").nodes).to be_instance_of(Array)
-      D3.select_all("b").nodes.each do |n|
+      expect(CY.select_all("b").nodes).to be_instance_of(Array)
+      CY.select_all("b").nodes.each do |n|
         expect(n).to be_instance_of(Native::Object)
       end
     end
