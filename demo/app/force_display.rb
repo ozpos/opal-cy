@@ -1,13 +1,14 @@
 require "opal-cy"
 require "data/force"  # https://bl.ocks.org/rofrischmann
 
-elements = [
+myelements = [
     { data: { id: 'a' } },
     { data: { id: 'b' } },
     { data: { id: 'c' } },
     { data: { id: 'ab', source: 'a', target: 'b' } },
     { data: { id: 'bc', source: 'b', target: 'c' } },
-    { data: { id: 'ca', source: 'c', target: 'a' } }].map(&:to_n)
+    { data: { id: 'ca', source: 'c', target: 'a' } }]
+               # do in class.map(&:to_n)
 
 style = [{style: {'background-color': '#a66',
                   'target-arrow-color': '#ccc'
@@ -24,24 +25,21 @@ style = [{style: {'background-color': '#a66',
 #layout = {name: 'grid', rows: 2}
 layout = {name: 'grid', rows: 1}.map(&:to_n)
 
-cycy = CY::Cytoscape.new({ container: `document.getElementById('cycy')`, elements: elements, style: style, layout: layout})
+#cycy = CY::Cytoscape.new({ container: `document.getElementById('cycy')`, elements: elements, style: style, layout: layout})
+cycy = CY::Cytoscape.new( container: `document.getElementById('cycy')`, elements: myelements )
 #cycy.layout.run # does not seem to do anything
 # js -> cycy.on('click', 'node', function(evt){  console.log( 'clicked ' + this.id() );
 
 myEvt = proc do |evt|
   `console.log( 'clicked ' + this.id() + #{evt} );`
 end
-#cycy.on('click', 'node', &myEvt()function(evt){  console.log( 'clicked ' + this.id() );
-cycy.cyon("click", "node", &myEvt)
+
+cycy.on("click", "node", &myEvt)
 # d3 node_elements context calling example
 #    .on("click"){|n|
 #      tooltip
 #          .style("background-color", "black")
 #    }
-
-#cyto.add elements.to_n
-#cyto.layout layout
-#cyto.style style
 
 nodes = ForceNodes.map(&:to_n)
 links = ForceLinks.map(&:to_n)
