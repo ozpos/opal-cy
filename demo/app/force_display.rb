@@ -30,8 +30,8 @@ cycy = CY::Cytoscape.new( container: `document.getElementById('cycy')`, elements
 #cycy.layout.run # does not seem to do anything
 # js -> cycy.on('click', 'node', function(evt){  console.log( 'clicked ' + this.id() );
 
-myEvt = proc do |evt|
-  `console.log( 'clicked ' + this.id() + #{evt} );`
+myEvt = Proc.new do |evt|
+  `console.log( 'clicked ' + this.id() + ' ' + this[0] + ' ' + evt.target.id() );`
 end
 
 cycy.on("click", "node", &myEvt)

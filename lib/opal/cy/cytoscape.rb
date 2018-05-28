@@ -8,7 +8,10 @@ module CY
 
     def on(name, selector, &callback)
       if callback
-        @native.JS.on(name, selector, callback)
+        case name
+          when 'click'
+            @native.JS.on(name, selector, callback)
+        end
         self
       else
         @native.JS.on(name, selector)
