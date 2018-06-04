@@ -7,7 +7,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>opal-cytoscape demos</h1>
+    <h1>opal-cytoscape demos <%=`opal -v`%>></h1>
     <ul>
       <% visualizations.each do |script, title| %>
         <li><a href="v/<%= script %>.html"><%= title %></a></li>

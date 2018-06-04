@@ -1,10 +1,10 @@
 module CY
   class Set
     include CY::Native
-    alias_native :empty?, :empty
-    alias_native :has?, :has
-    alias_native :size
-    alias_native :values
+ #   alias_native :empty?, :empty
+ #   alias_native :has?, :has
+ #   alias_native :size
+ #   alias_native :values
     alias_native_chainable :add
     alias_native_chainable :clear
     alias_native_chainable :remove

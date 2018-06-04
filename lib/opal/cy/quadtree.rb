@@ -36,9 +36,9 @@ module CY
 
   class QuadTree
     include CY::Native
-    alias_native :data
-    alias_native :find
-    alias_native :size
+#    alias_native :data
+#    alias_native :find
+#    alias_native :size
     alias_native_chainable :add
     alias_native_chainable :addAll
     alias_native_chainable :cover
