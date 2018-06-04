@@ -34,7 +34,9 @@ myEvt = Proc.new do |evt|
   `console.log( 'clicked ' + this.id() + ' ' + this[0] + ' ' + evt.target.id() );`
 end
 
-cycy.on("click", "node", &myEvt)
+# works with class
+               # cycy.on("click", "node", &myEvt)
+                cycy.on(:click, 'node') { |element, event| $console.log "clicked #{element.id}", event }
 # d3 node_elements context calling example
 #    .on("click"){|n|
 #      tooltip

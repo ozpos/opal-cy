@@ -9,8 +9,8 @@ module CY
     attribute_cy :domain
     attribute_cy :range
     alias_native_new :copy
-    alias_native :bandwidth
-    alias_native :step
+#    alias_native :bandwidth
+#    alias_native :step
     attribute_cy :padding
     attribute_cy :align
     attribute_cy :round

@@ -8,8 +8,8 @@ module CY
 
     attribute_cy :domain
     attribute_cy :range
-    alias_native :invert_extent, :invertExtent
-    alias_native :quantiles
+#    alias_native :invert_extent, :invertExtent
+#    alias_native :quantiles
     alias_native_new :copy
   end
 

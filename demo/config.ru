@@ -3,7 +3,7 @@ Bundler.require
 gem "sinatra"
 require "sinatra"
 
-opal = Opal::Server.new do |s|
+opal = Opal::Sprockets::Server.new do |s|
   s.append_path "/home/john/RubymineProjects/web/opal-cy/demo/app"
   s.append_path "/home/john/RubymineProjects/web/opal-cy/demo/assets"
 end

@@ -2,8 +2,8 @@
 module CY
   class Bisector
     include CY::Native
-    alias_native :left
-    alias_native :right
+#    alias_native :left
+#    alias_native :right
   end
 
   class << self

@@ -8,8 +8,8 @@ module CY
     attribute_cy :domain
     attribute_cy :range
     alias_native_new :copy
-    alias_native :bandwidth
-    alias_native :step
+  #  alias_native :bandwidth
+ #   alias_native :step
     # this is really weirdo one, as it sets both paddings* but returns inner one
     # All need to be in [0,1] range
     attribute_cy :padding

@@ -26,9 +26,9 @@ module CY
       end
     end
 
-    alias_native :format_rows, :formatRows
+ #   alias_native :format_rows, :formatRows
 
-    alias_native :format
+ #   alias_native :format
   end
 
   class << self

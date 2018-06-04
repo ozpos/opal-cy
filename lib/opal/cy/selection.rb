@@ -1,10 +1,10 @@
 module CY
   class Selection
     include CY::Native
-    alias_native :size
-    alias_native :empty?, :empty
-    alias_native :node
-    alias_native :nodes
+ #   alias_native :size
+ #   alias_native :empty?, :empty
+ #   alias_native :node
+ #   alias_native :nodes
 
     def inspect
       `#@native.toString()`
@@ -52,7 +52,7 @@ module CY
     alias_native_new :selectAll
     alias_native_new :enter
     alias_native_new :exit
-    alias_native :call
+#    alias_native :call
     alias_native_chainable :raise
     alias_native_chainable :lower
 

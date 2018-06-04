@@ -10,7 +10,7 @@ module CY
     attribute_cy_block :cornerRadius
     attribute_cy_block :startAngle
     attribute_cy_block :endAngle
-    alias_native :centroid
+ #   alias_native :centroid
   end
 
   class << self

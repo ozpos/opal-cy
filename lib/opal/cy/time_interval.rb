@@ -2,12 +2,12 @@ module CY
   class TimeInterval
     include CY::Native
 
-    alias_native :round
-    alias_native :floor
-    alias_native :ceil
-    alias_native :offset
-    alias_native :range
-    alias_native :count
+  #  alias_native :round
+  #  alias_native :floor
+  #  alias_native :ceil
+  #  alias_native :offset
+  #  alias_native :range
+  #  alias_native :count
     alias_native_new :every
 
     def filter(&block)

@@ -1,10 +1,10 @@
 module CY
   class TimeFormatLocale
     include CY::Native
-    alias_native :format, :format
-    alias_native :parse, :parse
-    alias_native :utc_format, :utcFormat
-    alias_native :utc_parse, :utcParse
+#    alias_native :format, :format
+ #   alias_native :parse, :parse
+ #   alias_native :utc_format, :utcFormat
+ #   alias_native :utc_parse, :utcParse
   end
 
   class << self

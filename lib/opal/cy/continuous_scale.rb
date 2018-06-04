@@ -5,14 +5,14 @@ module CY
       @native.call(t)
     end
 
-    alias_native :invert
+#    alias_native :invert
     attribute_cy :domain
     attribute_cy :range
     attribute_cy :clamp
     alias_native_chainable :nice
     alias_native_new :copy
-    alias_native :ticks
-    alias_native :tick_format, :tickFormat
+  #  alias_native :ticks
+  #  alias_native :tick_format, :tickFormat
     alias_native_chainable :rangeRound
     def interpolate(&block)
       if block

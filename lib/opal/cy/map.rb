@@ -10,11 +10,11 @@ module CY
     alias_native_chainable :set
     alias_native_chainable :remove
     alias_native_chainable :clear
-    alias_native :keys
-    alias_native :values
-    alias_native :size
-    alias_native :empty?, :empty
-    alias_native :has?, :has
+  #  alias_native :keys
+  #  alias_native :values
+  #  alias_native :size
+  #  alias_native :empty?, :empty
+  #  alias_native :has?, :has
     alias_method :[], :get
     alias_method :[]=, :set
 

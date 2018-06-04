@@ -5,7 +5,7 @@ module CY
     alias_native :to_s, :toString
     alias_native_new :brighter
     alias_native_new :darker
-    alias_native :displayable?, :displayable
+#    alias_native :displayable?, :displayable
     alias_native_new :rgb
 
     # Various subsets of these are valid depending on color - maybe we should properly subclass?

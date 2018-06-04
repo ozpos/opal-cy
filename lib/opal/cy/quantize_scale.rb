@@ -8,9 +8,9 @@ module CY
 
     attribute_cy :domain
     attribute_cy :range
-    alias_native :invert_extent, :invertExtent
-    alias_native :ticks
-    alias_native :tick_format, :tickFormat
+ #   alias_native :invert_extent, :invertExtent
+ #   alias_native :ticks
+ #   alias_native :tick_format, :tickFormat
     alias_native_chainable :nice
     alias_native_new :copy
   end
