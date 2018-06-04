@@ -1,16 +1,16 @@
 # Inspired by freecodecamp project
 # This visualization really stretches what opal-d3 can currently comfortably do
 # The code will hopefully become nicer in future versions of the gem
-require "opal-d3"
+require "opal-cy"
 require "json"
 
 url = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json"
-D3.json(url) do |err, response|
+CY.json(url) do |err, response|
   response = JSON.parse(`JSON.stringify(response)`)
   base_temperature = response[:baseTemperature]
   data_points = response[:monthlyVariance]
 
-  visualization = D3.select("#visualization")
+  visualization = CY.select("#visualization")
   svg = visualization.append("svg")
   height = svg.style("height").to_i
   width = svg.style("width").to_i
@@ -21,21 +21,21 @@ D3.json(url) do |err, response|
 
   tooltip = visualization.append("div").attr("id", "tooltip")
 
-  xmin, xmax = D3.extent(data_points){|d| d[:year] }
-  tmin, tmax = D3.extent(data_points){|d| d[:variance] }
+  xmin, xmax = CY.extent(data_points){|d| d[:year] }
+  tmin, tmax = CY.extent(data_points){|d| d[:variance] }
 
-  xscale = D3.scale_linear
+  xscale = CY.scale_linear
     .domain([xmin-0.5 , xmax+0.5])
     .range([margin_left, width-margin_right])
-  yscale = D3.scale_linear
+  yscale = CY.scale_linear
     .domain([0.5, 12+0.5])
     .range([margin_bottom, height-margin_top])
 
   tdomain = [tmin, tmin/2, 0, tmax/2, tmax]
-  tscale = D3.scale_linear
+  tscale = CY.scale_linear
     .range(["blue", "cyan", "green", "yellow", "red"])
     .domain(tdomain)
-    .interpolate(&D3.interpolate_hcl)
+    .interpolate(&CY.interpolate_hcl)
 
   month_names = [
     "January", "February", "March",
@@ -44,13 +44,13 @@ D3.json(url) do |err, response|
     "October", "November", "December",
   ]
 
-  xaxis = D3.axis_bottom(xscale)
-    .tick_format(&D3.format("d"))
+  xaxis = CY.axis_bottom(xscale)
+    .tick_format(&CY.format("d"))
   svg.append("g").attr("id", "x-axis")
     .style("transform", "translate(0, #{height-margin_bottom}px)")
     .call(xaxis)
 
-  yaxis = D3.axis_left(yscale)
+  yaxis = CY.axis_left(yscale)
     .tick_format{|d| month_names[d-1] }
   svg.append("g").attr("id", "y-axis")
     .style("transform", "translate(#{margin_left}px, 0)")
@@ -66,7 +66,7 @@ D3.json(url) do |err, response|
     .attr("y", "100px")
     .attr("id", "description")
 
-  legendscale = D3.scale_linear
+  legendscale = CY.scale_linear
     .domain([tmin, tmin/2, 0, tmax/2, tmax])
     .range([0, 40, 80, 120, 160])
 
@@ -83,7 +83,7 @@ D3.json(url) do |err, response|
     .style("border", "1px solid black")
     .style("fill"){|d| tscale.(d) }
 
-  legendaxis = D3.axis_bottom(legendscale)
+  legendaxis = CY.axis_bottom(legendscale)
 
   svg.append("g")
     .style("transform", "translate(120px, #{height-50}px)")

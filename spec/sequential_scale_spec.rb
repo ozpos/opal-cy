@@ -1,15 +1,15 @@
 describe "d3 - sequential scale" do
-  let(:scale) { D3.scale_sequential(&D3.send(interpolator)).domain([0, 100]) }
-  let(:curve_direct) { (0..20).map{|t| D3.send(interpolator, t/20.0)} }
+  let(:scale) { CY.scale_sequential(&CY.send(interpolator)).domain([0, 100]) }
+  let(:curve_direct) { (0..20).map{|t| CY.send(interpolator, t/20.0)} }
   let(:curve_scale) { (0..20).map{|t| scale.(t*100/20.0)} }
 
   it "d3.scale_sequential" do
-    expect(D3.scale_sequential(&D3.interpolate_viridis)).to be_instance_of(D3::SequentialScale)
-    expect(D3.scale_sequential{|t| D3.hsl(t * 360, 1, 0.5) }).to be_instance_of(D3::SequentialScale)
+    expect(CY.scale_sequential(&CY.interpolate_viridis)).to be_instance_of(CY::SequentialScale)
+    expect(CY.scale_sequential{|t| CY.hsl(t * 360, 1, 0.5) }).to be_instance_of(CY::SequentialScale)
   end
 
   it "basics" do
-    s = D3.scale_sequential{|t| D3.hsl(t * 360, 1, 0.5).to_s }
+    s = CY.scale_sequential{|t| CY.hsl(t * 360, 1, 0.5).to_s }
     expect(s.domain).to eq([0,1])
     s2 = s.copy.domain([0,100]).clamp(true)
     expect(s.domain).to eq([0,1])

@@ -1,8 +1,8 @@
-require "opal-d3"
+require "opal-cy"
 require "data/olympics_2016_medals"
 
 height = Olympics2016Medals.size * 24
-svg = D3.select("#visualization")
+svg = CY.select("#visualization")
   .append("svg")
   .attr("height", "#{height}px")
   .attr("width", "100%")
@@ -10,8 +10,8 @@ svg = D3.select("#visualization")
 width = svg.style("width").to_i
 max_medals = Olympics2016Medals.map(&:total).max
 
-x = D3.scale_linear.domain([0, max_medals]).range([0, width-50])
-y = D3.scale_linear.domain([0, Olympics2016Medals.size]).range([0, height])
+x = CY.scale_linear.domain([0, max_medals]).range([0, width-50])
+y = CY.scale_linear.domain([0, Olympics2016Medals.size]).range([0, height])
 
 chart_area = svg.append("g").attr("transform", "translate(50, 0)")
 

@@ -1,7 +1,7 @@
-require "opal-d3"
+require "opal-cy"
 require "data/harry_potter"
 
-svg = D3.select("#visualization")
+svg = CY.select("#visualization")
   .append("svg")
   .attr("height", "400px")
   .attr("width", "100%")
@@ -9,9 +9,9 @@ width = svg.style("width").to_i
 
 bar_size = (400-40-20) / (HarryPotterBooks.size)
 
-x = D3.scale_linear.domain(HarryPotterBooks.map(&:date).minmax).range([200,width-90])
-y = D3.scale_ordinal.range(HarryPotterBooks.size.times.map{|i| 40+i*bar_size}.reverse)
-s = D3.scale_sqrt.domain([0, HarryPotterBooks.map(&:pages).max]).range([0,50])
+x = CY.scale_linear.domain(HarryPotterBooks.map(&:date).minmax).range([200, width-90])
+y = CY.scale_ordinal.range(HarryPotterBooks.size.times.map{|i| 40+i*bar_size}.reverse)
+s = CY.scale_sqrt.domain([0, HarryPotterBooks.map(&:pages).max]).range([0, 50])
 
 HarryPotterBooks.each do |book|
   svg.append("text")
@@ -28,8 +28,8 @@ HarryPotterBooks.each do |book|
     .text(book.title)
 end
 
-axis_bottom = D3.axis_bottom(x)
-  .tick_format(D3.time_format("%Y-%m-%d"))
+axis_bottom = CY.axis_bottom(x)
+  .tick_format(CY.time_format("%Y-%m-%d"))
   .tick_values(HarryPotterBooks.map(&:date))
 svg.append("g")
   .attr("transform", "translate(0, 380)")

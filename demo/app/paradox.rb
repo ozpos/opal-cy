@@ -1,7 +1,7 @@
-require "opal-d3"
+require "opal-cy"
 require "data/paradox"
 
-svg = D3.select("#visualization")
+svg = CY.select("#visualization")
   .append("svg")
   .attr("height", "600px")
   .attr("width", "100%")
@@ -11,10 +11,10 @@ min_date, max_date = ParadoxGames.map(&:time).minmax
 count = ParadoxGames.map{|g| [g.series, g.number]}.uniq.size
 bar_height = 580 / count
 
-x = D3.scale_linear.domain([min_date, max_date]).range([0,width-220])
-y = D3.scale_ordinal.range(count.times.map{|i| bar_height * i})
-c = D3.scale_ordinal.range(D3.scheme_category_10)
-stripes = D3.scale_ordinal.range([0,1])
+x = CY.scale_linear.domain([min_date, max_date]).range([0, width-220])
+y = CY.scale_ordinal.range(count.times.map{|i| bar_height * i})
+c = CY.scale_ordinal.range(CY.scheme_category_10)
+stripes = CY.scale_ordinal.range([0, 1])
 
 graph_area = svg.append("g")
   .attr("transform", "translate(200, 20)")
@@ -29,7 +29,7 @@ ParadoxGames.each do |game|
       .attr("y", y.(full_game) + 4)
       .text(full_game)
 
-    color = D3.color(c.("#{game.series}"))
+    color = CY.color(c.("#{game.series}"))
     color = color.brighter(stripes.("#{full_game}"))
     graph_area.append("rect")
       .attr("x", -200)
@@ -49,10 +49,10 @@ ParadoxGames.each do |game|
     .attr("stroke-width", "1px")
     .attr("stroke", "black")
     .append("title")
-      .text("#{dlc ? game.dlc : full_game} - #{D3.time_format("%B %Y").(game.time)}")
+      .text("#{dlc ? game.dlc : full_game} - #{CY.time_format("%B %Y").(game.time)}")
 end
 
 
-axis_bottom = D3.axis_bottom(x)
-  .tick_format(D3.time_format("%B %Y"))
+axis_bottom = CY.axis_bottom(x)
+  .tick_format(CY.time_format("%B %Y"))
 graph_area.append("g").attr("transform", "translate(0, 560)").call(axis_bottom)

@@ -4,10 +4,10 @@ describe "d3 - pie" do
     generated.map{|arc| arc.map{|k,v| [k, v.is_a?(Float) ? v.round(2) : v] }.to_h}
   }
   let(:data) { [1, 3, 4] }
-  let(:pie) { D3.pie }
+  let(:pie) { CY.pie }
 
   it "d3.pie" do
-    expect(D3.pie).to be_instance_of(D3::PieGenerator)
+    expect(CY.pie).to be_instance_of(CY::PieGenerator)
   end
 
   describe "basics" do
@@ -66,7 +66,7 @@ describe "d3 - pie" do
       ["d", 15],
       ["c", 20],
     ]}
-    let(:pie) { D3.pie.value{|d| d[1]} }
+    let(:pie) { CY.pie.value{|d| d[1]} }
     let(:order) {
       generated
         .sort_by{|arc| arc[:index] }

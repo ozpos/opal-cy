@@ -25,25 +25,25 @@ describe "d3 - time format" do
   }}
 
   it "d3.time_format" do
-    f = D3.time_format("%B %d, %Y")
+    f = CY.time_format("%B %d, %Y")
     expect(f).to be_instance_of(Proc)
     expect(f.(Time.parse("June 30, 2015"))).to eq("June 30, 2015")
   end
 
   it "d3.time_parse" do
-    f = D3.time_parse("%B %d, %Y")
+    f = CY.time_parse("%B %d, %Y")
     expect(f).to be_instance_of(Proc)
     expect(f.("June 30, 2015")).to eq(Time.parse("June 30, 2015 00:00:00"))
   end
 
   it "d3.utc_format" do
-    f = D3.utc_format("%B %d, %Y")
+    f = CY.utc_format("%B %d, %Y")
     expect(f).to be_instance_of(Proc)
     expect(f.(Time.parse("June 30, 2015 12:00:00"))).to eq("June 30, 2015")
   end
 
   it "d3.utc_parse" do
-    f = D3.utc_parse("%B %d, %Y")
+    f = CY.utc_parse("%B %d, %Y")
     expect(f).to be_instance_of(Proc)
     expect(f.("June 30, 2015")).to eq(Time.parse("June 30, 2015 00:00:00 UTC"))
   end
@@ -51,12 +51,12 @@ describe "d3 - time format" do
   it "d3.iso_format / d3.iso_parse" do
     t = Time.parse("June 30, 2015 12:30:45 UTC")
     s = "2015-06-30T12:30:45.000Z"
-    expect(D3.iso_format(t)).to eq(s)
-    expect(D3.iso_parse(s)).to eq(t)
+    expect(CY.iso_format(t)).to eq(s)
+    expect(CY.iso_parse(s)).to eq(t)
   end
 
   describe "locale" do
-    let(:locale) { D3.time_format_locale(pl) }
+    let(:locale) { CY.time_format_locale(pl) }
 
     it "d3.format" do
       f = locale.format("%B %d, %Y")
@@ -86,13 +86,13 @@ describe "d3 - time format" do
   # This test affects global state, so we must be sure to restore it
   it "d3.time_format_default_locale" do
     t = Time.parse("June 30, 2015 12:30:00")
-    expect(D3.time_format("%c").(t)).to eq("6/30/2015, 12:30:00 PM")
+    expect(CY.time_format("%c").(t)).to eq("6/30/2015, 12:30:00 PM")
 
-    locale_pl = D3.time_format_default_locale(pl)
-    expect(D3.time_format("%c").(t)).to eq("Wtorek, 30 Czerwiec 2015, 12:30:00")
+    locale_pl = CY.time_format_default_locale(pl)
+    expect(CY.time_format("%c").(t)).to eq("Wtorek, 30 Czerwiec 2015, 12:30:00")
 
-    locale_us = D3.time_format_default_locale(us)
-    expect(D3.time_format("%c").(t)).to eq("6/30/2015, 12:30:00 PM")
+    locale_us = CY.time_format_default_locale(us)
+    expect(CY.time_format("%c").(t)).to eq("6/30/2015, 12:30:00 PM")
 
     expect(locale_pl.format("%c").(t)).to eq("Wtorek, 30 Czerwiec 2015, 12:30:00")
     expect(locale_us.format("%c").(t)).to eq("6/30/2015, 12:30:00 PM")

@@ -1,10 +1,10 @@
-require "opal-d3"
+require "opal-cy"
 require "data/force"  # ForceNodes[{}]
 
 nodes = ForceNodes.map(&:to_n)
 links = ForceLinks.map(&:to_n)
 
-visualization = D3.select("#visualization")
+visualization = CY.select("#visualization")
 svg = visualization.append("svg")
           .attr("height", "600px")
           .attr("width", "950px")
@@ -39,17 +39,17 @@ text_elements = svg.append("g")
             .attr("dx", 15)
             .attr("dy", 4)
 
-link_force = D3
+link_force = CY
             .force_link
             .id{|link| `link.id` }
             .strength{|link| `link.strength` }
 
 
-simulation = D3
+simulation = CY
                  .force_simulation
                  .force("link", link_force)
-                 .force("charge", D3.force_many_body.strength(-120))
-                 .force("center", D3.force_center(width / 2, height / 2))
+                 .force("charge", CY.force_many_body.strength(-120))
+                 .force("center", CY.force_center(width / 2, height / 2))
 
 simulation.nodes(nodes).on("tick") do
   node_elements

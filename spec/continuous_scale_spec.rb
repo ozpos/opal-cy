@@ -3,11 +3,11 @@ require "time"
 describe "d3 - continuous scale" do
   describe "linear" do
     it "d3.scale_linear" do
-      expect(D3.scale_linear).to be_instance_of(D3::ContinuousScale)
+      expect(CY.scale_linear).to be_instance_of(CY::ContinuousScale)
     end
 
     it "basics" do
-      x = D3.scale_linear.domain([10, 130]).range([0, 960])
+      x = CY.scale_linear.domain([10, 130]).range([0, 960])
       expect(x.domain).to eq([10, 130])
       expect(x.range).to eq([0, 960])
       expect(x.(20)).to eq(80)
@@ -17,17 +17,17 @@ describe "d3 - continuous scale" do
     end
 
     it "range_round" do
-      x = D3.scale_linear.domain([0,6]).range([0, 100])
-      y = D3.scale_linear.domain([0,6]).range_round([0, 100])
+      x = CY.scale_linear.domain([0, 6]).range([0, 100])
+      y = CY.scale_linear.domain([0, 6]).range_round([0, 100])
       expect(x.(4)).to eq(66.66666666666666)
       expect(y.(4)).to eq(67)
     end
 
     describe "interpolate" do
-      let(:x) { D3.scale_linear.domain([0,6]).range([0, 100]) }
+      let(:x) { CY.scale_linear.domain([0, 6]).range([0, 100]) }
       let(:xf) { x.copy.interpolate{|a,b| proc{|t| (a + (b-a)*t).floor }}}
       let(:xc) { x.copy.interpolate{|a,b| proc{|t| (a + (b-a)*t).ceil }}}
-      let(:xr) { x.copy.interpolate(&D3.interpolate_round) }
+      let(:xr) { x.copy.interpolate(&CY.interpolate_round) }
       it "floor" do
         expect(xf.(4)).to eq(66)
       end
@@ -44,7 +44,7 @@ describe "d3 - continuous scale" do
     end
 
     it ".clamp" do
-      x = D3.scale_linear.domain([10, 130]).range([0, 960])
+      x = CY.scale_linear.domain([10, 130]).range([0, 960])
       expect(x.clamp).to eq(false)
       x.clamp(true)
       expect(x.clamp).to eq(true)
@@ -53,7 +53,7 @@ describe "d3 - continuous scale" do
     end
 
     it ".nice / .copy" do
-      x = D3.scale_linear.domain([7, 127]).range([3, 955])
+      x = CY.scale_linear.domain([7, 127]).range([3, 955])
       xn = x.copy.nice
       expect(xn.domain).to eq([0, 130])
       expect(xn.range).to eq([3, 955])
@@ -69,13 +69,13 @@ describe "d3 - continuous scale" do
     end
 
     it "color" do
-      color = D3.scale_linear.domain([10, 100]).range(["brown", "steelblue"])
+      color = CY.scale_linear.domain([10, 100]).range(["brown", "steelblue"])
       expect(color.(20)).to eq("rgb(154, 52, 57)")
       expect(color.(50)).to eq("rgb(123, 81, 103)")
     end
 
     it "color piecewise" do
-      color = D3.scale_linear.domain([-1, 0, 1]).range(["red", "white", "green"])
+      color = CY.scale_linear.domain([-1, 0, 1]).range(["red", "white", "green"])
       expect(color.(-1)).to eq("rgb(255, 0, 0)")
       expect(color.(-0.5)).to eq("rgb(255, 128, 128)")
       expect(color.(0)).to eq("rgb(255, 255, 255)")
@@ -84,7 +84,7 @@ describe "d3 - continuous scale" do
     end
 
     it ".ticks / .tick_format" do
-      x = D3.scale_linear.domain([-1, 1]).range([0, 960])
+      x = CY.scale_linear.domain([-1, 1]).range([0, 960])
       expect(x.ticks(5)).to eq([-1, -0.5, 0, 0.5, 1])
       expect(x.ticks.map{|v| v.round(2)}).to eq([-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
       tick_format = x.tick_format(5, "+%")
@@ -94,12 +94,12 @@ describe "d3 - continuous scale" do
 
   describe "pow" do
     it "d3.scale_pow" do
-      expect(D3.scale_pow).to be_instance_of(D3::PowScale)
-      expect(D3.scale_pow.exponent).to eq(1)
+      expect(CY.scale_pow).to be_instance_of(CY::PowScale)
+      expect(CY.scale_pow.exponent).to eq(1)
     end
 
     it "basics" do
-      x = D3.scale_pow.exponent(2).domain([0, 10]).range([0, 10000])
+      x = CY.scale_pow.exponent(2).domain([0, 10]).range([0, 10000])
       expect(x.(5)).to eq(2500)
       expect(x.invert(4900)).to eq(7)
     end
@@ -107,19 +107,19 @@ describe "d3 - continuous scale" do
 
   describe "sqrt" do
     it "d3.scale_sqrt" do
-      expect(D3.scale_sqrt).to be_instance_of(D3::PowScale)
-      expect(D3.scale_sqrt.exponent).to eq(0.5)
+      expect(CY.scale_sqrt).to be_instance_of(CY::PowScale)
+      expect(CY.scale_sqrt.exponent).to eq(0.5)
     end
   end
 
   describe "log" do
     it 'd3.scale_log' do
-      expect(D3.scale_log).to be_instance_of(D3::LogScale)
-      expect(D3.scale_log.base).to eq(10)
+      expect(CY.scale_log).to be_instance_of(CY::LogScale)
+      expect(CY.scale_log.base).to eq(10)
     end
 
     it "basics" do
-      x = D3.scale_log.base(2).domain([1, 1024]).range([0, 100])
+      x = CY.scale_log.base(2).domain([1, 1024]).range([0, 100])
       expect(x.(256)).to eq(80)
       expect(x.invert(50)).to eq(32)
     end
@@ -127,11 +127,11 @@ describe "d3 - continuous scale" do
 
   describe "identity" do
     it 'd3.scale_log' do
-      expect(D3.scale_identity).to be_instance_of(D3::ContinuousScale)
+      expect(CY.scale_identity).to be_instance_of(CY::ContinuousScale)
     end
 
     it "basics" do
-      x = D3.scale_identity.domain([10,20])
+      x = CY.scale_identity.domain([10, 20])
       expect(x.(16)).to eq(16)
       expect(x.invert(12)).to eq(12)
       expect(x.domain).to eq([10,20])
@@ -142,14 +142,14 @@ describe "d3 - continuous scale" do
   # Sadly this can't be tested totally properly due to ridiculous mess
   # javascript timezone management is
   describe "time" do
-    let(:x) { D3.scale_time.domain([Time.parse("Jan 01 1990 00:00:00"), Time.parse(Time.parse("Jan 01 1998 00:00:00"))]).range([0,100]) }
-    let(:y) { D3.scale_utc.domain([Time.parse("Jan 01 1990 00:00:00"), Time.parse(Time.parse("Jan 01 1998 00:00:00"))]).range([0,100]) }
+    let(:x) { CY.scale_time.domain([Time.parse("Jan 01 1990 00:00:00"), Time.parse(Time.parse("Jan 01 1998 00:00:00"))]).range([0, 100]) }
+    let(:y) { CY.scale_utc.domain([Time.parse("Jan 01 1990 00:00:00"), Time.parse(Time.parse("Jan 01 1998 00:00:00"))]).range([0, 100]) }
     it "d3.scale_time" do
-      expect(D3.scale_time).to be_instance_of(D3::ContinuousScale)
+      expect(CY.scale_time).to be_instance_of(CY::ContinuousScale)
     end
 
     it "d3.scale_utc" do
-      expect(D3.scale_utc).to be_instance_of(D3::ContinuousScale)
+      expect(CY.scale_utc).to be_instance_of(CY::ContinuousScale)
     end
 
     it "basics" do
@@ -171,7 +171,7 @@ describe "d3 - continuous scale" do
     end
 
     it "ticks interval" do
-      expect(x.ticks(D3.time_month.every(8)).map{|d| d.to_s.split[0]}).to eq([
+      expect(x.ticks(CY.time_month.every(8)).map{|d| d.to_s.split[0]}).to eq([
         "1990-01-01",
         "1990-09-01",
         "1991-01-01",
@@ -193,7 +193,7 @@ describe "d3 - continuous scale" do
     end
 
     it "utc ticks interval" do
-      expect(y.ticks(D3.utc_month.every(8)).map{|d| d.to_s.split[0]}).to eq([
+      expect(y.ticks(CY.utc_month.every(8)).map{|d| d.to_s.split[0]}).to eq([
         "1990-01-01",
         "1990-09-01",
         "1991-01-01",

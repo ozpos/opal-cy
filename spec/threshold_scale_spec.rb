@@ -1,7 +1,7 @@
 describe "d3 - threshold scale" do
-  let(:color) { D3.scale_threshold.domain([0, 1]).range(["red", "white", "green"]) }
+  let(:color) { CY.scale_threshold.domain([0, 1]).range(["red", "white", "green"]) }
   it "d3.scale_threshold" do
-    expect(D3.scale_threshold).to be_instance_of(D3::ThresholdScale)
+    expect(CY.scale_threshold).to be_instance_of(CY::ThresholdScale)
   end
 
   it "basics" do

@@ -1,7 +1,7 @@
 describe "d3-ease" do
   let(:range) { (0..20).map{|x| x / 20 }}
-  let(:curve) { range.map{|t| D3.send(ease, t).round(4) }}
-  let(:f) { D3.send(ease) }
+  let(:curve) { range.map{|t| CY.send(ease, t).round(4) }}
+  let(:f) { CY.send(ease) }
   let(:curve_f) { range.map{|t| f.call(t).round(4) } }
   describe "d3.ease_linear" do
     let(:ease) { :ease_linear }
@@ -211,7 +211,7 @@ describe "d3-ease" do
     end
 
     describe "custom exponent" do
-      let(:f) { D3.send(ease).exponent(2) }
+      let(:f) { CY.send(ease).exponent(2) }
       it do
         expect(curve_f).to eq([0, 0.0025, 0.01, 0.0225, 0.04, 0.0625, 0.09, 0.1225, 0.16, 0.2025, 0.25, 0.3025, 0.36, 0.4225, 0.49, 0.5625, 0.64, 0.7225, 0.81, 0.9025, 1])
       end
@@ -226,7 +226,7 @@ describe "d3-ease" do
     end
 
     describe "custom exponent" do
-      let(:f) { D3.send(ease).exponent(2) }
+      let(:f) { CY.send(ease).exponent(2) }
       it do
         expect(curve_f).to eq([0, 0.0975, 0.19, 0.2775, 0.36, 0.4375, 0.51, 0.5775, 0.64, 0.6975, 0.75, 0.7975, 0.84, 0.8775, 0.91, 0.9375, 0.96, 0.9775, 0.99, 0.9975, 1])
       end
@@ -241,7 +241,7 @@ describe "d3-ease" do
     end
 
     describe "custom exponent" do
-      let(:f) { D3.send(ease).exponent(2) }
+      let(:f) { CY.send(ease).exponent(2) }
       it do
         expect(curve_f).to eq([0, 0.005, 0.02, 0.045, 0.08, 0.125, 0.18, 0.245, 0.32, 0.405, 0.5, 0.595, 0.68, 0.755, 0.82, 0.875, 0.92, 0.955, 0.98, 0.995, 1])
       end
@@ -256,7 +256,7 @@ describe "d3-ease" do
     end
 
     describe "custom overshoot" do
-      let(:f) { D3.send(ease).overshoot(4) }
+      let(:f) { CY.send(ease).overshoot(4) }
       it do
         expect(curve_f).to eq([0, -0.0094, -0.035, -0.0731, -0.12, -0.1719, -0.225, -0.2756, -0.32, -0.3544, -0.375, -0.3781, -0.36, -0.3169, -0.245, -0.1406, 0, 0.1806, 0.405, 0.6769, 1])
       end
@@ -271,7 +271,7 @@ describe "d3-ease" do
     end
 
     describe "custom overshoot" do
-      let(:f) { D3.send(ease).overshoot(4) }
+      let(:f) { CY.send(ease).overshoot(4) }
       it do
         expect(curve_f).to eq([0, 0.3231, 0.595, 0.8194, 1, 1.1406, 1.245, 1.3169, 1.36, 1.3781, 1.375, 1.3544, 1.32, 1.2756, 1.225, 1.1719, 1.12, 1.0731, 1.035, 1.0094, 1])
       end
@@ -286,7 +286,7 @@ describe "d3-ease" do
     end
 
     describe "custom overshoot" do
-      let(:f) { D3.send(ease).overshoot(4) }
+      let(:f) { CY.send(ease).overshoot(4) }
       it do
         expect(curve_f).to eq([0, -0.0175, -0.06, -0.1125, -0.16, -0.1875, -0.18, -0.1225, 0, 0.2025, 0.5, 0.7975, 1, 1.1225, 1.18, 1.1875, 1.16, 1.1125, 1.06, 1.0175, 1])
       end
@@ -301,7 +301,7 @@ describe "d3-ease" do
     end
 
     describe "custom overshoot" do
-      let(:f) { D3.send(ease).overshoot(4) }
+      let(:f) { CY.send(ease).overshoot(4) }
       it do
         expect(curve_f).to eq([0, -0.0175, -0.06, -0.1125, -0.16, -0.1875, -0.18, -0.1225, 0, 0.2025, 0.5, 0.7975, 1, 1.1225, 1.18, 1.1875, 1.16, 1.1125, 1.06, 1.0175, 1])
       end
@@ -316,7 +316,7 @@ describe "d3-ease" do
     end
 
     describe "custom amplitude/period" do
-      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      let(:f) { CY.send(ease).amplitude(2).period(0.2) }
       it do
         expect(curve_f).to eq([0.001, -0.0024, -0.002, 0.0048, 0.0039, -0.0096, -0.0078, 0.0191, 0.0156, -0.0383, -0.0313, 0.0765, 0.0625, -0.1531, -0.125, 0.3062, 0.25, -0.6124, -0.5, 1.2247, 1])
       end
@@ -331,7 +331,7 @@ describe "d3-ease" do
     end
 
     describe "custom amplitude/period" do
-      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      let(:f) { CY.send(ease).amplitude(2).period(0.2) }
       it do
         expect(curve_f).to eq([0, -0.2247, 1.5, 1.6124, 0.75, 0.6938, 1.125, 1.1531, 0.9375, 0.9235, 1.0313, 1.0383, 0.9844, 0.9809, 1.0078, 1.0096, 0.9961, 0.9952, 1.002, 1.0024, 0.999])
       end
@@ -346,7 +346,7 @@ describe "d3-ease" do
     end
 
     describe "custom amplitude/period" do
-      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      let(:f) { CY.send(ease).amplitude(2).period(0.2) }
       it do
         expect(curve_f).to eq([0, -0.2247, 1.5, 1.6124, 0.75, 0.6938, 1.125, 1.1531, 0.9375, 0.9235, 1.0313, 1.0383, 0.9844, 0.9809, 1.0078, 1.0096, 0.9961, 0.9952, 1.002, 1.0024, 0.999])
       end
@@ -361,7 +361,7 @@ describe "d3-ease" do
     end
 
     describe "custom amplitude/period" do
-      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      let(:f) { CY.send(ease).amplitude(2).period(0.2) }
       it do
         expect(curve_f).to eq([0.0005, -0.001, 0.002, -0.0039, 0.0078, -0.0156, 0.0313, -0.0625, 0.125, -0.25, 0.5, 1.25, 0.875, 1.0625, 0.9688, 1.0156, 0.9922, 1.0039, 0.998, 1.001, 0.9995])
       end

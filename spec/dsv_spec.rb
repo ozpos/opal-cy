@@ -27,9 +27,9 @@ describe "d3 - dsv" do
       {"Year"=>"2000", "Make"=>"Mercury", "Model"=>"Cougar", "Length"=>"2.38"},
     ]
   }
-  let(:csv_format) { D3.dsv_format(",") }
-  let(:tsv_format) { D3.dsv_format("\t") }
-  let(:dsv_format) { D3.dsv_format(";") }
+  let(:csv_format) { CY.dsv_format(",") }
+  let(:tsv_format) { CY.dsv_format("\t") }
+  let(:dsv_format) { CY.dsv_format(";") }
   let(:format_row) { proc{|(y,f,m,l)|
     ["converted", (Integer(y) rescue y), f, m, (Float(l) rescue l)]
   }}
@@ -44,7 +44,7 @@ describe "d3 - dsv" do
   }}
 
   it "d3.dsv_format" do
-    expect(D3.dsv_format(";")).to be_instance_of(D3::DsvFormat)
+    expect(CY.dsv_format(";")).to be_instance_of(CY::DsvFormat)
   end
 
   it "dsv_format.parse_rows" do
@@ -64,32 +64,32 @@ describe "d3 - dsv" do
   end
 
   it "d3.csv_parse_rows" do
-    expect(D3.csv_parse_rows(csv_example)).to eq(
+    expect(CY.csv_parse_rows(csv_example)).to eq(
            csv_format.parse_rows(csv_example))
     expect(dsv_format.parse_rows(dsv_example)).to eq(
            csv_format.parse_rows(csv_example))
-    expect(D3.csv_parse_rows(csv_example, format_row)).to eq(
+    expect(CY.csv_parse_rows(csv_example, format_row)).to eq(
            csv_format.parse_rows(csv_example, format_row))
-    expect(D3.csv_parse_rows(csv_example, &format_row)).to eq(
+    expect(CY.csv_parse_rows(csv_example, &format_row)).to eq(
            csv_format.parse_rows(csv_example, &format_row))
-    expect(D3.csv_parse_rows(csv_example, filter_row)).to eq(
+    expect(CY.csv_parse_rows(csv_example, filter_row)).to eq(
            csv_format.parse_rows(csv_example, filter_row))
-    expect(D3.csv_parse_rows(csv_example, &filter_row)).to eq(
+    expect(CY.csv_parse_rows(csv_example, &filter_row)).to eq(
            csv_format.parse_rows(csv_example, &filter_row))
   end
 
   it "d3.tsv_parse_rows" do
-    expect(D3.tsv_parse_rows(tsv_example)).to eq(
+    expect(CY.tsv_parse_rows(tsv_example)).to eq(
            tsv_format.parse_rows(tsv_example))
     expect(dsv_format.parse_rows(dsv_example)).to eq(
            tsv_format.parse_rows(tsv_example))
-    expect(D3.tsv_parse_rows(tsv_example, format_row)).to eq(
+    expect(CY.tsv_parse_rows(tsv_example, format_row)).to eq(
            tsv_format.parse_rows(tsv_example, format_row))
-    expect(D3.tsv_parse_rows(tsv_example, &format_row)).to eq(
+    expect(CY.tsv_parse_rows(tsv_example, &format_row)).to eq(
            tsv_format.parse_rows(tsv_example, &format_row))
-    expect(D3.tsv_parse_rows(tsv_example, filter_row)).to eq(
+    expect(CY.tsv_parse_rows(tsv_example, filter_row)).to eq(
            tsv_format.parse_rows(tsv_example, filter_row))
-    expect(D3.tsv_parse_rows(tsv_example, &filter_row)).to eq(
+    expect(CY.tsv_parse_rows(tsv_example, &filter_row)).to eq(
           tsv_format.parse_rows(tsv_example, &filter_row))
   end
 
@@ -101,12 +101,12 @@ describe "d3 - dsv" do
 
   it "d3.csv_format_rows" do
     expect(csv_format.format_rows(rows_example)).to eq(csv_example.chomp)
-    expect(D3.csv_format_rows(rows_example)).to eq(csv_example.chomp)
+    expect(CY.csv_format_rows(rows_example)).to eq(csv_example.chomp)
   end
 
   it "d3.tsv_format_rows" do
     expect(tsv_format.format_rows(rows_example)).to eq(tsv_example.chomp)
-    expect(D3.tsv_format_rows(rows_example)).to eq(tsv_example.chomp)
+    expect(CY.tsv_format_rows(rows_example)).to eq(tsv_example.chomp)
   end
 
   # We have ways to enforce proper Hash order, maybe it's a good idea
@@ -129,32 +129,32 @@ describe "d3 - dsv" do
   end
 
   it "d3.csv_parse" do
-    expect(D3.csv_parse(csv_example)).to eq(
+    expect(CY.csv_parse(csv_example)).to eq(
            csv_format.parse(csv_example))
     expect(dsv_format.parse(dsv_example)).to eq(
            csv_format.parse(csv_example))
-    expect(D3.csv_parse(csv_example, format_obj)).to eq(
+    expect(CY.csv_parse(csv_example, format_obj)).to eq(
            csv_format.parse(csv_example, format_obj))
-    expect(D3.csv_parse(csv_example, &format_obj)).to eq(
+    expect(CY.csv_parse(csv_example, &format_obj)).to eq(
            csv_format.parse(csv_example, &format_obj))
-    expect(D3.csv_parse(csv_example, filter_obj)).to eq(
+    expect(CY.csv_parse(csv_example, filter_obj)).to eq(
            csv_format.parse(csv_example, filter_obj))
-    expect(D3.csv_parse(csv_example, &filter_obj)).to eq(
+    expect(CY.csv_parse(csv_example, &filter_obj)).to eq(
           csv_format.parse(csv_example, &filter_obj))
   end
 
   it "d3.tsv_parse" do
-    expect(D3.tsv_parse(tsv_example)).to eq(
+    expect(CY.tsv_parse(tsv_example)).to eq(
            tsv_format.parse(tsv_example))
     expect(dsv_format.parse(dsv_example)).to eq(
            tsv_format.parse(tsv_example))
-    expect(D3.tsv_parse(tsv_example, format_obj)).to eq(
+    expect(CY.tsv_parse(tsv_example, format_obj)).to eq(
            tsv_format.parse(tsv_example, format_obj))
-    expect(D3.tsv_parse(tsv_example, &format_obj)).to eq(
+    expect(CY.tsv_parse(tsv_example, &format_obj)).to eq(
            tsv_format.parse(tsv_example, &format_obj))
-    expect(D3.tsv_parse(tsv_example, filter_obj)).to eq(
+    expect(CY.tsv_parse(tsv_example, filter_obj)).to eq(
            tsv_format.parse(tsv_example, filter_obj))
-    expect(D3.tsv_parse(tsv_example, &filter_obj)).to eq(
+    expect(CY.tsv_parse(tsv_example, &filter_obj)).to eq(
           tsv_format.parse(tsv_example, &filter_obj))
   end
 
@@ -175,9 +175,9 @@ describe "d3 - dsv" do
       "2000\tMercury\t"
     )
     expect(tsv_format.format(objs_example)).to eq(
-           D3.tsv_format(objs_example))
+                                                   CY.tsv_format(objs_example))
     expect(tsv_format.format(objs_example, ["Year", "Make", "Speed"])).to eq(
-           D3.tsv_format(objs_example, ["Year", "Make", "Speed"]))
+                                                                              CY.tsv_format(objs_example, ["Year", "Make", "Speed"]))
   end
 
   it "d3.csv_format" do
@@ -187,8 +187,8 @@ describe "d3 - dsv" do
       "2000,Mercury,"
     )
     expect(csv_format.format(objs_example)).to eq(
-           D3.csv_format(objs_example))
+                                                   CY.csv_format(objs_example))
     expect(csv_format.format(objs_example, ["Year", "Make", "Speed"])).to eq(
-           D3.csv_format(objs_example, ["Year", "Make", "Speed"]))
+                                                                              CY.csv_format(objs_example, ["Year", "Make", "Speed"]))
   end
 end

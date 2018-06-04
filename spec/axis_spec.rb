@@ -1,26 +1,26 @@
 describe "d3 - axis" do
   after(:each) do
-    D3.select("#test-area").html("")
+    CY.select("#test-area").html("")
   end
 
-  let(:scale) { D3.scale_linear.domain([0,80_000_000]).range([0,800]) }
-  let(:scale2) { D3.scale_linear.domain([0,30]).range([0,600]) }
-  let(:axis) { D3.axis_top(scale) }
+  let(:scale) { CY.scale_linear.domain([0, 80_000_000]).range([0, 800]) }
+  let(:scale2) { CY.scale_linear.domain([0, 30]).range([0, 600]) }
+  let(:axis) { CY.axis_top(scale) }
 
   it "d3.axis_top" do
-    expect(D3.axis_top(scale)).to be_instance_of(D3::Axis)
+    expect(CY.axis_top(scale)).to be_instance_of(CY::Axis)
   end
 
   it "d3.axis_bottom" do
-    expect(D3.axis_bottom(scale)).to be_instance_of(D3::Axis)
+    expect(CY.axis_bottom(scale)).to be_instance_of(CY::Axis)
   end
 
   it "d3.axis_right" do
-    expect(D3.axis_right(scale)).to be_instance_of(D3::Axis)
+    expect(CY.axis_right(scale)).to be_instance_of(CY::Axis)
   end
 
   it "d3.axis_left" do
-    expect(D3.axis_left(scale)).to be_instance_of(D3::Axis)
+    expect(CY.axis_left(scale)).to be_instance_of(CY::Axis)
   end
 
   it "axis.scale" do
@@ -57,10 +57,10 @@ describe "d3 - axis" do
 
   describe "axis.tick_values" do
     it "defaults" do
-      context = D3.select("#test-area").append("svg")
+      context = CY.select("#test-area").append("svg")
       expect(axis.tick_values).to eq(nil)
       axis.(context)
-      expect(D3.select("#test-area").html).to eq([
+      expect(CY.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
         '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0</text></g>',
@@ -77,11 +77,11 @@ describe "d3 - axis" do
     end
 
     it "set/get" do
-      context = D3.select("#test-area").append("svg")
+      context = CY.select("#test-area").append("svg")
       axis.tick_values = [0, 20_000_000, 40_000_000]
       expect(axis.tick_values).to eq([0, 20_000_000, 40_000_000])
       axis.(context)
-      expect(D3.select("#test-area").html).to eq([
+      expect(CY.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
         '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0</text></g>',
@@ -95,14 +95,14 @@ describe "d3 - axis" do
   end
 
   describe "axis.tick_format" do
-    let(:scale) { D3.scale_linear.domain([0,80_000]).range([0,800]) }
+    let(:scale) { CY.scale_linear.domain([0, 80_000]).range([0, 800]) }
     it "basics" do
-      context = D3.select("#test-area").append("svg")
+      context = CY.select("#test-area").append("svg")
       expect(axis.tick_format).to eq(nil)
       axis.tick_values = [0, 20_000, 40_000]
-      axis.tick_format = D3.format(",.2f")
+      axis.tick_format = CY.format(",.2f")
       axis.(context)
-      expect(D3.select("#test-area").html).to eq([
+      expect(CY.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
         '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0.00</text></g>',
@@ -113,13 +113,13 @@ describe "d3 - axis" do
     end
 
     it "block" do
-      context = D3.select("#test-area").append("svg")
+      context = CY.select("#test-area").append("svg")
       expect(axis.tick_format).to eq(nil)
       axis.tick_values = [0, 20_000, 40_000]
       axis.tick_format{|d| "#{d}x"}
       expect(axis.tick_format.(5)).to eq("5x")
       axis.(context)
-      expect(D3.select("#test-area").html).to eq([
+      expect(CY.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
         '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0x</text></g>',
@@ -131,10 +131,10 @@ describe "d3 - axis" do
   end
 
   it "axis.ticks" do
-    context = D3.select("#test-area").append("svg")
+    context = CY.select("#test-area").append("svg")
     axis.ticks(10, ".2f")
     axis.(context)
-    expect(D3.select("#test-area").html).to eq([
+    expect(CY.select("#test-area").html).to eq([
       '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
       '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
       '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0.00</text></g>',
@@ -151,12 +151,12 @@ describe "d3 - axis" do
   end
 
   it "axis.tick_arguments" do
-    context = D3.select("#test-area").append("svg")
+    context = CY.select("#test-area").append("svg")
     expect(axis.tick_arguments).to eq([])
     axis.tick_arguments([10, ".2f"])
     expect(axis.tick_arguments).to eq([10, ".2f"])
     axis.(context)
-    expect(D3.select("#test-area").html).to eq([
+    expect(CY.select("#test-area").html).to eq([
       '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
       '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
       '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0.00</text></g>',

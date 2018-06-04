@@ -1,18 +1,18 @@
 describe "d3-collections - nests" do
   it "d3.nest" do
-    expect(D3.nest).to be_instance_of(D3::Nest)
+    expect(CY.nest).to be_instance_of(CY::Nest)
   end
 
   it "zero levels" do
     data = [61, 35, 24, 37, 9, 20, 42, 55, 58, 57]
-    nest = D3.nest.sort_values(:ascending)
+    nest = CY.nest.sort_values(:ascending)
     expect(nest.entries(data)).to eq(data)
     expect(nest.map(data)).to eq(data)
   end
 
   it "one level" do
     data = [61, 35, 24, 37, 9, 20, 42, 55, 58, 57]
-    nest = D3.nest.key{|x| (x / 10).floor}.sort_keys(:ascending).sort_values(:descending)
+    nest = CY.nest.key{|x| (x / 10).floor}.sort_keys(:ascending).sort_values(:descending)
     expect(nest.map(data).to_h).to eq(
       {"6"=>[61], "3"=>[37, 35], "2"=>[24, 20], "0"=>[9], "4"=>[42], "5"=>[58, 57, 55]}
     )
@@ -33,7 +33,7 @@ describe "d3-collections - nests" do
   it "one level and rollup" do
     data = [61, 35, 24, 37, 9, 20, 42, 55, 58, 57]
     # rollup and sorting got fixed in 4.10
-    nest = D3.nest.key{|x| (x / 10).floor}.sort_keys(:ascending)
+    nest = CY.nest.key{|x| (x / 10).floor}.sort_keys(:ascending)
                   .sort_values(:descending)
                   .rollup{|*x| x.join(":")}
     expect(nest.map(data).to_h).to eq(
@@ -51,7 +51,7 @@ describe "d3-collections - nests" do
 
   it "three levels" do
     data = (1..25).to_a + (80..85).to_a
-    nest = D3.nest.key{|x| "d#{ x % 2}" }.sort_keys(:ascending)
+    nest = CY.nest.key{|x| "d#{ x % 2}" }.sort_keys(:ascending)
                   .key{|x| "t#{ x % 3}" }.sort_keys(:descending)
                   .key{|x| "v#{ x % 5}" }.sort_keys(:ascending)
                   .sort_values(:descending)
@@ -70,7 +70,7 @@ describe "d3-collections - nests" do
 
   it "three levels and rollup" do
     data = (1..25).to_a + (80..85).to_a
-    nest = D3.nest.key{|x| "d#{ x % 2}" }.sort_keys(:ascending)
+    nest = CY.nest.key{|x| "d#{ x % 2}" }.sort_keys(:ascending)
                   .key{|x| "t#{ x % 3}" }.sort_keys(:descending)
                   .key{|x| "v#{ x % 5}" }.sort_keys(:ascending)
                   .rollup{|*x| x.join(":")}

@@ -1,9 +1,9 @@
 describe "d3 - quantize scale" do
-  let(:color) { D3.scale_quantize.domain([0, 1]).range(["brown", "steelblue"]) }
-  let(:width) { D3.scale_quantize.domain([10, 100]).range([1, 2, 4]) }
+  let(:color) { CY.scale_quantize.domain([0, 1]).range(["brown", "steelblue"]) }
+  let(:width) { CY.scale_quantize.domain([10, 100]).range([1, 2, 4]) }
 
   it "d3.quantize_scale" do
-    expect(D3.scale_quantize).to be_instance_of(D3::QuantizeScale)
+    expect(CY.scale_quantize).to be_instance_of(CY::QuantizeScale)
   end
 
   it "basics - color" do
@@ -21,7 +21,7 @@ describe "d3 - quantize scale" do
   end
 
   it ".nice / .copy" do
-    s = D3.scale_quantize.domain([7, 109]).range([1, 2, 4])
+    s = CY.scale_quantize.domain([7, 109]).range([1, 2, 4])
     sc = s.copy
     expect(s.nice().domain).to eq([0, 110])
     expect(sc.domain).to eq([7, 109])

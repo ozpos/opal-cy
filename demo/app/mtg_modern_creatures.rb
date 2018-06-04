@@ -1,7 +1,7 @@
-require "opal-d3"
+require "opal-cy"
 require "data/mtg_modern_creatures"
 
-svg = D3.select("#visualization")
+svg = CY.select("#visualization")
   .append("svg")
   .attr("height", "600px")
   .attr("width", "600px")
@@ -9,9 +9,9 @@ svg = D3.select("#visualization")
 # Use one scale not two so it's a square
 min, max = MtgModernCreatures.flat_map{|c| [c.power, c.toughness]}.minmax
 
-pt = D3.scale_linear.domain([min-1, max+1]).range([0, 580])
+pt = CY.scale_linear.domain([min-1, max+1]).range([0, 580])
 box_size = pt.(1) - pt.(0)
-c = D3.scale_log
+c = CY.scale_log
   .domain([1, MtgModernCreatures.map(&:count).max])
   .range(["rgb(128, 255, 128)", "rgb(128, 128, 255)"])
 
